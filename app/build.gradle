@@ -1,0 +1,75 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 24
+    buildToolsVersion "25.0.0"
+
+    defaultConfig {
+        applicationId "myapp.applop.com.myapplication"
+        minSdkVersion 15
+        targetSdkVersion 24
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+    packagingOptions {
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/MANIFEST.MF'
+    }
+
+    signingConfigs {
+        releaseKey {
+            storeFile file("../keystore/applopkey.jks") //Path to the keystore file
+            keyAlias "applopcer"
+            storePassword "rahul123"
+            keyPassword "rahul123"
+        }
+    }
+
+    productFlavors {
+        appname1{
+            applicationId "com.applop.preciouspearlmakeup"
+            versionCode 2016042717
+            versionName "2.0"
+        }
+        appname2 {
+            applicationId "com.applop.demandandsupply_525805"
+            versionCode 5
+            versionName "3.0"
+
+        }
+        appname3{
+            applicationId "com.applop.pawsforcause_643008"
+            versionCode 8
+            versionName "2.0"
+        }
+        appname4{
+            applicationId "com.applop.shriraj693349817"
+            versionCode 2
+            versionName "2.0"
+        }
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            productFlavors.appname1.signingConfig signingConfigs.releaseKey
+        }
+    }
+}
+
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile 'com.android.support:appcompat-v7:24.2.1'
+    compile 'com.android.support:design:24.2.1'
+    testCompile 'junit:junit:4.12'
+}
